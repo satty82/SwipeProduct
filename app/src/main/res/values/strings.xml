@@ -3,4 +3,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="swipe_product">Swipe Product</string>
+    <string name="add_product">Add Product</string>
+    <string name="product_type">Product Type :</string>
 </resources>
