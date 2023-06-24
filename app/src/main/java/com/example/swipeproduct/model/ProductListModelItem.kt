@@ -1,6 +1,6 @@
 package com.example.swipeproduct.model
 
-data class ProductDetailsModelItem(
+data class ProductListModelItem(
     val image: String,
     val price: Double,
     val product_name: String,

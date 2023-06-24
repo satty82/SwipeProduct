@@ -56,6 +56,8 @@
                                 android:layout_width="150dp"
                                 android:layout_height="150dp"
                                 android:layout_gravity="center"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/add_round"
                                 android:visibility="visible" />
 
 
@@ -64,7 +66,9 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="35dp"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginBottom="10dp"
                             android:layout_toRightOf="@+id/image"
                             android:orientation="vertical">
 
@@ -74,7 +78,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/proxima_nova_regular"
                                 android:singleLine="true"
-                                android:text="Product Name"
+                                android:text="@string/product_name"
                                 android:textColor="@color/black"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -83,8 +87,8 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="5dp">
+                                android:layout_marginBottom="10dp"
+                                android:orientation="horizontal">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -92,10 +96,19 @@
                                     android:orientation="horizontal">
 
                                     <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_marginRight="3dp"
+                                        android:text="Tax:"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="15sp"
+                                        android:textStyle="italic" />
+
+                                    <TextView
                                         android:id="@+id/productTax"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="5dp"
                                         android:layout_marginTop="5dp"
                                         android:text="00"
                                         android:textColor="@android:color/black"
@@ -115,37 +128,38 @@
                                         android:textStyle="italic"
                                         android:visibility="visible" />
 
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="5dp"
-                                        android:background="@drawable/off_round"
-                                        android:gravity="center"
-                                        android:paddingTop="2dp">
 
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginLeft="6dp"
-                                            android:layout_marginRight="5dp"
-                                            android:text="@string/product_type"
-                                            android:textColor="@android:color/white"
-                                            android:textSize="13sp"
-                                            android:textStyle="bold"
-                                            android:visibility="visible" />
-
-                                        <TextView
-                                            android:id="@+id/productType"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginRight="5dp"
-                                            android:text="Service"
-                                            android:textColor="@android:color/white"
-                                            android:textSize="15sp"
-                                            android:textStyle="bold"
-                                            android:visibility="visible" />
-                                    </LinearLayout>
                                 </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:background="@drawable/off_round"
+                                android:gravity="center">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="6dp"
+                                    android:layout_marginRight="5dp"
+                                    android:text="@string/product_type"
+                                    android:textColor="@android:color/white"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:visibility="visible" />
+
+                                <TextView
+                                    android:id="@+id/productType"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="5dp"
+                                    android:text="Service"
+                                    android:textColor="@android:color/white"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold"
+                                    android:visibility="visible" />
                             </LinearLayout>
 
                         </LinearLayout>

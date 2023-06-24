@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/ListingProduct_fragment"
-        android:name="com.example.swipeproduct.fragment.ListingProduct"
+        android:name="com.example.swipeproduct.UI.fragment.ListingProduct"
         android:label="Fragment listingProduct"
         tools:layout="@layout/fragment_listing_product">
         <action
@@ -17,12 +17,13 @@
 
     <fragment
         android:id="@+id/AddProduct_fragment"
-        android:name="com.example.swipeproduct.fragment.AddProduct"
+        android:name="com.example.swipeproduct.UI.fragment.AddProduct"
         android:label="Fragment AddProduct"
         tools:layout="@layout/fragment_add_product">
         <action
             android:id="@+id/action_AddProduct_fragment_to_ListingProduct_fragment"
-            app:destination="@id/ListingProduct_fragment" />
+            app:destination="@id/ListingProduct_fragment"
+            />
     </fragment>
 
 </navigation>

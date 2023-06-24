@@ -1,26 +1,58 @@
 package com.example.swipeproduct.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.swipeproduct.api.ProductDetailsService
-import com.example.swipeproduct.model.ProductDetailsModel
+import com.example.swipeproduct.api.ServiceBuilder.client
+import com.example.swipeproduct.model.ProductListModel
+import com.google.gson.Gson
+import com.google.gson.JsonParser
+import okhttp3.Call
+import okhttp3.Callback
+import java.io.IOException
 
-class ProductRepository(private val productDetailsService: ProductDetailsService) {
+class ProductRepository {
 
-    private val rocketLiveData = MutableLiveData<ProductDetailsModel>()
+    private val productLiveData = MutableLiveData<ProductListModel>()
+    val productLD: LiveData<ProductListModel>
+        get() = productLiveData
+    fun getAPIResponse(){
 
-    val product: LiveData<ProductDetailsModel>
-    get() = rocketLiveData
+        // A call can be used once therefore using clone for multiple calls
+        client.clone().enqueue(object : Callback {
 
-    suspend fun getProductItemsDetails(){
+            override fun onFailure(call: Call, e: IOException) {
+                Log.e("MainViewModel", "Response is failure $e")
+            }
 
-        val result = productDetailsService.getProductDetails()
+            override fun onResponse(call: Call, response: okhttp3.Response) {
 
-        result.body()?.let {
+                if (response.isSuccessful) {
 
-            rocketLiveData.postValue(result.body())
+                     val data = response.body!!.string()
 
-        }
-        }
+                    Log.e("MainViewModel", "Response is data $data")
 
+                    val jsonParser = JsonParser.parseString(data)
+
+                   val modelRepo = productLiveData.postValue( Gson().fromJson(jsonParser, ProductListModel::class.java))
+
+                    Log.e("MainViewModel", "Response is model $modelRepo")
+
+
+                } else {
+                    Log.e("MainViewModel", "Response is not present")
+
+
+                }
+
+            }
+
+        })
     }
+
+
+}
+
+
+

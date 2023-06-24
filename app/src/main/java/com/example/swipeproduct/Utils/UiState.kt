@@ -1,12 +1,13 @@
 package com.example.swipeproduct.Utils
 
-import com.example.swipeproduct.model.ProductDetailsModel
+import androidx.lifecycle.LiveData
+import com.example.swipeproduct.model.ProductListModel
 
 
 sealed class UiState {
     object Loading : UiState()
     data class Success(
-        val versionFeatures: List<ProductDetailsModel>
+        val productListModel: LiveData<ProductListModel>
     ) : UiState()
 
     data class Error(val message: String) : UiState()
