@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -51,7 +52,6 @@ class ListingProduct : Fragment() {
 
             if(it!=null)
             {
-
                 render(it)
             }
 
@@ -61,7 +61,6 @@ class ListingProduct : Fragment() {
 
         return fragmentListingProductBinding.root
     }
-
 
     private fun render(uiState: UiState) {
         when (uiState) {
@@ -131,6 +130,15 @@ class ListingProduct : Fragment() {
             findNavController().navigate(R.id.action_ListingProduct_fragment_to_AddProduct_fragment,bundle)
         }
 
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        requireActivity().onBackPressedDispatcher.addCallback(this){
+
+                    requireActivity().finish()
+        }
     }
 
 

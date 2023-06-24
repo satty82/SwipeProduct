@@ -112,7 +112,7 @@
                         android:padding="@dimen/margin_10">
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/addressInputLayout"
+                            android:id="@+id/tienterProductName"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -125,10 +125,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/proxima_nova_regular"
-                                android:inputType="textMultiLine"
-                                android:lines="3"
-                                android:maxLength="120"
-                                android:maxLines="5"
+                                android:inputType="text"
                                 android:text=""
                                 />
                         </com.google.android.material.textfield.TextInputLayout>
@@ -136,6 +133,7 @@
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                             android:layout_width="match_parent"
+                            android:id="@+id/tienterSellingPrice"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:hint="Selling Price"
@@ -146,10 +144,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/proxima_nova_regular"
-                                android:inputType="textMultiLine"
-                                android:lines="3"
-                                android:maxLength="120"
-                                android:maxLines="5"
+                                android:inputType="number"
                                 android:text=""
                                />
                         </com.google.android.material.textfield.TextInputLayout>
@@ -157,6 +152,7 @@
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                             android:layout_width="match_parent"
+                            android:id="@+id/tientertax"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:hint="Tax Amount"
@@ -167,9 +163,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/proxima_nova_regular"
-                                android:lines="3"
-                                android:maxLength="120"
-                                android:maxLines="5"
+                                android:inputType="number"
                                 android:text=""
                                 />
                         </com.google.android.material.textfield.TextInputLayout>
@@ -216,14 +210,16 @@
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 
-                        <com.google.android.material.button.MaterialButton
+                        <Button
                                 android:id="@+id/selectImageButton"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="12dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                            android:backgroundTint="@color/colorPrimary"
                                 android:fontFamily="@font/proxima_nova_regular"
                                 android:text="Select image (Optional) "
-                                android:background="@color/colorPrimary"
                                 />
 
 
@@ -273,15 +269,18 @@
                                     android:width="150dp"
                                     android:layout_marginTop="12dp"
                                     android:textSize="17sp"
+                                    android:backgroundTint="@color/colorPrimary"
                                     android:text="BACK"
+                                    android:layout_marginRight="15dp"
                                     android:textStyle="bold"
-                                    android:background="@color/colorPrimary"
                                     android:fontFamily="@font/proximanovabold"/>
+
                                 <View
                                     android:layout_width="0.8dp"
                                     android:layout_height="match_parent"
                                     android:background="@color/gray"
                                     android:layout_marginTop="12dp" />
+
                                 <Button
                                     android:id="@+id/submitButton"
                                     android:layout_width="match_parent"
@@ -289,9 +288,10 @@
                                     android:width="150dp"
                                     android:layout_marginTop="12dp"
                                     android:textSize="17sp"
+                                    android:layout_marginStart="15dp"
+                                    android:backgroundTint="@color/colorPrimary"
                                     android:text="SUBMIT"
                                     android:textStyle="bold"
-                                    android:background="@color/colorPrimary"
                                     android:fontFamily="@font/proximanovabold"/>
 
 
