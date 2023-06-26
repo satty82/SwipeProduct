@@ -5,20 +5,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.swipeproduct.api.ServiceBuilder.client
 import com.example.swipeproduct.model.AddProductModel
+import com.example.swipeproduct.model.ProductAddedSuccessfullyModel
 import com.example.swipeproduct.model.ProductListModel
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.FormBody
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import org.json.JSONException
 import org.json.JSONObject
@@ -28,6 +28,10 @@ import java.io.IOException
 class ProductRepository {
 
     private val productLiveData = MutableLiveData<ProductListModel>()
+    private val responseSuccessLiveData = MutableLiveData<ProductAddedSuccessfullyModel>()
+
+    val responseSuccessLD: LiveData<ProductAddedSuccessfullyModel>
+        get() = responseSuccessLiveData
     val productLD: LiveData<ProductListModel>
         get() = productLiveData
 
@@ -58,6 +62,8 @@ class ProductRepository {
                             )
                         )
 
+
+
                         Log.e("MainViewModel", "Response is model $modelRepo")
 
 
@@ -75,34 +81,20 @@ class ProductRepository {
         }
     }
 
-    fun sendDataAPI(addProductModel: AddProductModel) {
-        Log.d("Repository", "POST response object is $addProductModel")
-
-      CoroutineScope(Dispatchers.IO).launch {
+    suspend fun sendDataAPI(addProductModel: AddProductModel)  = withContext(Dispatchers.IO){
 
 
-            // create your json here
-            val jsonObject = JSONObject()
-            try {
-                jsonObject.put("product_name", addProductModel.product_name);
-                jsonObject.put("product_type", addProductModel.product_type);
-                jsonObject.put("price",        addProductModel.price);
-                jsonObject.put("tax",          addProductModel.tax);
-                jsonObject.put("files",        addProductModel.image);
+        try {
 
-            } catch (e: JSONException) {
-                e.printStackTrace()
-            }
-            Log.d("Repository", "POST response JSon is $jsonObject")
             val requestBody = FormBody.Builder()
                 .add("product_name", addProductModel.product_name)
                 .add("product_type", addProductModel.product_type)
                 .add("price",   addProductModel.price)
                 .add("tax",  addProductModel.tax)
+                .add("files", addProductModel.image)
                 .build()
 
             val client = OkHttpClient()
-            val mediaType = "application/json; charset=utf-8".toMediaType()
             val request: Request = Request.Builder()
                 .url("https://app.getswipe.in/api/public/add")
                 .addHeader("content-type", "multipart/form-data")
@@ -111,21 +103,30 @@ class ProductRepository {
 
             var resStr: String? = null
             var response: Response? = null
-            try {
+
+
                 response = client.newCall(request).execute()
                 resStr = response.body!!.string()
-                Log.d("Repository", "POST response is $resStr")
+                Timber.e("POST response is $resStr")
+
+                val jsonParser = JsonParser.parseString(resStr)
+
+                   Gson().fromJson(
+                   jsonParser,
+                   ProductAddedSuccessfullyModel::class.java
+               )
+
 
 
             } catch (e: IOException) {
                 e.printStackTrace()
-                Log.d("Repository", "POST response is error $e")
+
             }
 
 
         }
 
-    }
+
 
 
 }

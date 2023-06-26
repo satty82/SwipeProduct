@@ -6,5 +6,6 @@
     <string name="add_product">Add Product</string>
     <string name="product_type">Product Type :</string>
     <string name="product_name">Product Name</string>
+    <string name="no_internet">Check for Internet Connection!!</string>
     <string name="select_product_type_from_the_list">Select product type from the list</string>
 </resources>

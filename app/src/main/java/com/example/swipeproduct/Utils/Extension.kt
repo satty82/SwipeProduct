@@ -5,10 +5,16 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.example.swipeproduct.R
 
 fun Button.setDefaultColor(){
-    setBackgroundColor(resources.getColor(R.color.colorPrimary))
+
+    setBackgroundColor(ContextCompat.getColor(context,R.color.colorPrimary))
+}
+
+fun Button.setGreyColor(){
+    setBackgroundColor(ContextCompat.getColor(context,R.color.grey))
 }
 
 fun View.setVisible() {
